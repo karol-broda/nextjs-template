@@ -1,0 +1,10 @@
+{
+  "trailingCommas": "all",
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true,
+  "experimentalTailwindcss": {
+    "stylesheet": "./src/styles/globals.css",
+    "functions": ["cn", "tv", "clsx"]
+  }
+}

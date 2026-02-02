@@ -1,16 +1,15 @@
-import env from "#/utils/env";
-import { defineConfig } from "drizzle-kit";
+import { defineConfig } from 'drizzle-kit';
 
 export default defineConfig({
-  dialect: "postgresql",
+  dialect: 'postgresql',
   dbCredentials: {
-    url: env.database_uri,
+    url: process.env['DATABASE_URL'] ?? '',
   },
-  schema: "./src/db/schema.ts",
-  out: "./src/db/migrations",
+  schema: './src/db/schema.ts',
+  out: './src/db/migrations',
   migrations: {
-    prefix: "timestamp",
-    table: "__drizzle_migrations__",
-    schema: "public",
+    prefix: 'timestamp',
+    table: '__drizzle_migrations__',
+    schema: 'public',
   },
 });

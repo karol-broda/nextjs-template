@@ -1,16 +1,6 @@
-import { getUser } from "#/auth/utils";
-import React from "react";
+import { getRequiredSession } from '#/auth/utils';
 
-export default async function Layout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  await getUser();
-
-  return (
-    <div className="">
-      <div>{children}</div>
-    </div>
-  );
+export default async function AuthedLayout({ children }: { children: React.ReactNode }) {
+  await getRequiredSession();
+  return <>{children}</>;
 }

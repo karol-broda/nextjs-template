@@ -1,11 +1,4 @@
-type Mode =
-  | 'lower'
-  | 'upper'
-  | 'camel'
-  | 'pascal'
-  | 'snake'
-  | 'kebab'
-  | 'title';
+type Mode = 'lower' | 'upper' | 'camel' | 'pascal' | 'snake' | 'kebab' | 'title';
 
 type ChangeCaseOptions = {
   mode?: Mode;
@@ -30,15 +23,10 @@ const TextUtils = {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   },
 
-  toTitleCase(
-    str: string,
-    { capitalizeEach = true }: TitleCaseOptions = {}
-  ): string {
+  toTitleCase(str: string, { capitalizeEach = true }: TitleCaseOptions = {}): string {
     const words = str.toLowerCase().split(/\s+/);
     if (capitalizeEach) {
-      return words
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
+      return words.map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     } else {
       return TextUtils.capitalizeFirst(str);
     }
@@ -47,9 +35,7 @@ const TextUtils = {
   toCamelCase(str: string): string {
     const words = str.toLowerCase().split(/[\s-_]+/);
     return words
-      .map((word, i) =>
-        i === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)
-      )
+      .map((word, i) => (i === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)))
       .join('');
   },
 
@@ -77,7 +63,7 @@ const TextUtils = {
 
   changeCase(
     str: string,
-    { mode = 'lower', capitalizeEach = false }: ChangeCaseOptions = {}
+    { mode = 'lower', capitalizeEach = false }: ChangeCaseOptions = {},
   ): string {
     let result: string;
     switch (mode) {

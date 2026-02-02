@@ -1,0 +1,49 @@
+'use client';
+
+import {
+  CircleCheckIcon,
+  InfoIcon,
+  Loader2Icon,
+  OctagonXIcon,
+  TriangleAlertIcon,
+} from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { Toaster as Sonner, type ToasterProps } from 'sonner';
+
+type CSSWithVars = React.CSSProperties & Record<`--${string}`, string>;
+
+function resolveTheme(theme: string): 'light' | 'dark' | 'system' {
+  if (theme === 'light' || theme === 'dark' || theme === 'system') {
+    return theme;
+  }
+  return 'system';
+}
+
+const sonnerStyles: CSSWithVars = {
+  '--normal-bg': 'var(--popover)',
+  '--normal-text': 'var(--popover-foreground)',
+  '--normal-border': 'var(--border)',
+  '--border-radius': 'var(--radius)',
+};
+
+const Toaster = ({ theme: _themeProp, ...props }: ToasterProps) => {
+  const { theme = 'system' } = useTheme();
+
+  return (
+    <Sonner
+      theme={resolveTheme(theme)}
+      className="toaster group"
+      icons={{
+        success: <CircleCheckIcon className="size-4" />,
+        info: <InfoIcon className="size-4" />,
+        warning: <TriangleAlertIcon className="size-4" />,
+        error: <OctagonXIcon className="size-4" />,
+        loading: <Loader2Icon className="size-4 animate-spin" />,
+      }}
+      style={sonnerStyles}
+      {...props}
+    />
+  );
+};
+
+export { Toaster };

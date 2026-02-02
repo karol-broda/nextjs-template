@@ -1,9 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Default values for variables
 db_container_name="template-postgres"
-db_image="pgvector/pgvector:0.8.0-pg17"
-db_name="template"
+db_image="pgvector/pgvector:pg18"
+db_name="nextjs-template"
+db_user="postgres"
+db_password="password"
+db_port="5432"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -32,7 +34,6 @@ done
 
 if ! command -v docker &>/dev/null; then
   echo "docker is not installed. Please install it: https://docs.docker.com/engine/install/"
-  echo "On macOS, consider using Colima so you don't have to deal with Docker Desktop."
   exit 1
 fi
 
@@ -51,16 +52,12 @@ if [ -n "$container_id" ]; then
   exit 0
 fi
 
-set -a
-source .env
-
-db_password=$(echo "$DATABASE_URI" | awk -F':' '{print $3}' | awk -F'@' '{print $1}')
-db_port=$(echo "$DATABASE_URI" | awk -F':' '{print $4}' | awk -F'\/' '{print $1}')
-
 docker run -d \
   --name "$db_container_name" \
-  -e POSTGRES_USER="postgres" \
+  -e POSTGRES_USER="$db_user" \
   -e POSTGRES_PASSWORD="$db_password" \
   -e POSTGRES_DB="$db_name" \
   -p "$db_port":5432 \
-  "$db_image" && echo "Container '$db_container_name' created"
+  "$db_image" && echo "Container '$db_container_name' created."
+
+echo "Connection: postgresql://${db_user}:${db_password}@localhost:${db_port}/${db_name}"
