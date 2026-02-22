@@ -1,7 +1,8 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import { Moon, Sun } from '@phosphor-icons/react';
+import { MoonIcon, SunIcon } from '@phosphor-icons/react';
+import { Button } from '#/components/ui/button';
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -12,14 +13,9 @@ export function ThemeToggle() {
   };
 
   return (
-    <button
-      type="button"
-      onClick={toggleTheme}
-      className="rounded-md p-2 hover:bg-accent"
-      aria-label="toggle theme"
-    >
-      <Sun className="hidden h-5 w-5 dark:block" />
-      <Moon className="block h-5 w-5 dark:hidden" />
-    </button>
+    <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="toggle theme">
+      <SunIcon className="hidden size-5 dark:block" />
+      <MoonIcon className="block size-5 dark:hidden" />
+    </Button>
   );
 }

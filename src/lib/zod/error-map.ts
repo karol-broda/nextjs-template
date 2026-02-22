@@ -34,3 +34,11 @@ export function requiredString(field: string) {
     error: `${field} is required`,
   });
 }
+
+export function firstIssueMessage(
+  error: z.ZodError,
+  fallback: string = 'invalid input',
+): string {
+  const firstIssue = error.issues[0] ?? null;
+  return firstIssue !== null ? firstIssue.message : fallback;
+}
