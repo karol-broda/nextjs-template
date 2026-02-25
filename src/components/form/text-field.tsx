@@ -30,9 +30,7 @@ export function TextField({ label, type = 'text', placeholder }: TextFieldProps)
         aria-invalid={hasError}
       />
       {hasError && (
-        <p className="text-sm text-destructive">
-          {errors.map((err) => err.message).join(', ')}
-        </p>
+        <p className="text-sm text-destructive">{errors.map((err) => err.message).join(', ')}</p>
       )}
     </div>
   );

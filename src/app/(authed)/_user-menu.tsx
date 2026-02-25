@@ -33,9 +33,7 @@ export function UserMenu({ name, email, image }: UserMenuProps) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger
-        render={<Button variant="ghost" size="icon" className="rounded-full" />}
-      >
+      <DropdownMenuTrigger render={<Button variant="ghost" size="icon" className="rounded-full" />}>
         <Avatar size="sm">
           {image !== null && <AvatarImage src={image} alt={name} />}
           <AvatarFallback>{getInitials(name)}</AvatarFallback>

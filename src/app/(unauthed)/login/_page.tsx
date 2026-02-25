@@ -7,7 +7,14 @@ import { authClient } from '#/auth/client';
 import { credentialsSchema } from '#/auth/schema';
 import { useAppForm } from '#/hooks/use-app-form';
 import { FormError } from '#/components/form-error';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '#/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '#/components/ui/card';
 
 export function LoginForm() {
   const [apiError, setApiError] = useState('');
@@ -30,9 +37,7 @@ export function LoginForm() {
       });
 
       if (signInError !== null) {
-        setApiError(
-          typeof signInError.message === 'string' ? signInError.message : 'login failed',
-        );
+        setApiError(typeof signInError.message === 'string' ? signInError.message : 'login failed');
         return;
       }
 

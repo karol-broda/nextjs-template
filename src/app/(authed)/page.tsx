@@ -14,7 +14,10 @@ export default async function HomePage() {
     <Container maxWidth="lg" className="py-8">
       <Stack gap="lg">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold">dashboard</h1>
+          <div>
+            <h1 className="text-2xl font-bold">dashboard</h1>
+            <p className="text-sm text-muted-foreground">logged in as {session.user.email}</p>
+          </div>
           <Stack direction="row" gap="sm" align="center">
             <ThemeToggle />
             <UserMenu
@@ -62,9 +65,7 @@ export default async function HomePage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">
-                upgrade to unlock more features.
-              </p>
+              <p className="text-sm text-muted-foreground">upgrade to unlock more features.</p>
             </CardContent>
           </Card>
         </div>

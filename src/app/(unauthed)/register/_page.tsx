@@ -7,7 +7,14 @@ import { authClient } from '#/auth/client';
 import { registerSchema } from '#/auth/schema';
 import { useAppForm } from '#/hooks/use-app-form';
 import { FormError } from '#/components/form-error';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '#/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '#/components/ui/card';
 
 export function RegisterForm() {
   const [apiError, setApiError] = useState('');
@@ -58,9 +65,7 @@ export function RegisterForm() {
         <CardContent className="flex flex-col gap-4">
           <form.AppField
             name="name"
-            children={(field) => (
-              <field.TextField label="name" placeholder="your name" />
-            )}
+            children={(field) => <field.TextField label="name" placeholder="your name" />}
           />
           <form.AppField
             name="email"
