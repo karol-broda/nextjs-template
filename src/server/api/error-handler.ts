@@ -1,6 +1,6 @@
 import { Elysia } from 'elysia';
 import { AppError } from '#/lib/result';
-import logger from '#/lib/logger';
+import { log } from '#/lib/logger';
 
 export const errorHandler = new Elysia({ name: 'error-handler' }).onError(
   { as: 'global' },
@@ -20,7 +20,7 @@ export const errorHandler = new Elysia({ name: 'error-handler' }).onError(
       );
     }
 
-    logger.error({ err: error }, 'unhandled error');
+    log.error({ err: error, action: 'unhandled_api_error' });
     return Response.json(
       { code: 'INTERNAL_ERROR', message: 'something went wrong' },
       { status: 500 },

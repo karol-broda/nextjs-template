@@ -1,7 +1,7 @@
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { auth } from '.';
-import logger from '#/lib/logger';
+import { log } from '#/lib/logger';
 
 export async function getSession() {
   try {
@@ -10,7 +10,7 @@ export async function getSession() {
     });
     return session;
   } catch (error) {
-    logger.error({ err: error }, 'failed to get session');
+    log.error({ err: error, action: 'get_session_failed' });
     return null;
   }
 }

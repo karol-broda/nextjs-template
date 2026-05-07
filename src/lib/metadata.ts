@@ -1,28 +1,23 @@
 import type { Metadata } from 'next';
-
-const siteConfig = {
-  name: 'Next.js Template',
-  description: 'a modern next.js template',
-  url: process.env['NEXT_PUBLIC_URL'] ?? 'http://localhost:3000',
-};
+import { appName, appDescription, baseUrl } from './config';
 
 export function createMetadata(overrides: Metadata = {}): Metadata {
   const rawTitle = overrides.title ?? null;
   const rawDescription = overrides.description ?? null;
 
-  const title = rawTitle !== null ? `${String(rawTitle)} | ${siteConfig.name}` : siteConfig.name;
+  const title = rawTitle !== null ? `${String(rawTitle)} | ${appName}` : appName;
 
-  const description = rawDescription !== null ? rawDescription : siteConfig.description;
+  const description = rawDescription !== null ? rawDescription : appDescription;
 
   return {
     ...overrides,
     title,
     description,
-    metadataBase: new URL(siteConfig.url),
+    metadataBase: new URL(baseUrl),
     openGraph: {
       title,
       description: String(description),
-      siteName: siteConfig.name,
+      siteName: appName,
       type: 'website',
       ...(typeof overrides.openGraph === 'object' ? overrides.openGraph : {}),
     },

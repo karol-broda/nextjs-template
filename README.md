@@ -31,11 +31,18 @@ an opinionated next.js starter for shipping fast without thinking about setup
 - elysia mounted as a catch-all route
 - eden client for end-to-end type-safe api calls
 
+### observability
+
+- evlog for structured logging, wide events, and error reporting
+- auto-redaction of PII in production (emails, cards, IPs, JWTs)
+- user-agent and request-size enrichers
+- next.js instrumentation for server startup hooks and unhandled errors
+- client-side logging via EvlogProvider
+
 ### utilities
 
 - neverthrow for typed error handling
 - nuqs for url search param state
-- pino for structured logging
 - sonner for toast notifications
 
 ### tooling
