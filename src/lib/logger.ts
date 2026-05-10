@@ -1,13 +1,21 @@
-import pino from 'pino';
+import { createEvlog } from 'evlog/next';
+import { createInstrumentation } from 'evlog/next/instrumentation';
+import { createUserAgentEnricher, createRequestSizeEnricher } from 'evlog/enrichers';
+import { serviceName } from './config';
 
-const isDev = process.env['NODE_ENV'] === 'development';
-const level = process.env['LOG_LEVEL'] ?? 'info';
+const enrichers = [createUserAgentEnricher(), createRequestSizeEnricher()];
 
-const logger = isDev
-  ? pino({
-      level,
-      transport: { target: 'pino-pretty', options: { colorize: true } },
-    })
-  : pino({ level });
+export const { withEvlog, useLogger, log, createError, createEvlogError } = createEvlog({
+  service: serviceName,
+  redact: true,
+  enrich: (ctx) => {
+    for (const enricher of enrichers) enricher(ctx);
+  },
+});
 
-export default logger;
+export const { register, onRequestError } = createInstrumentation({
+  service: serviceName,
+  captureOutput: true,
+});
+
+export default log;

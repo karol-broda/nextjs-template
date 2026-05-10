@@ -1,6 +1,5 @@
 import type { MetadataRoute } from 'next';
-
-const baseUrl = process.env['NEXT_PUBLIC_URL'] ?? 'http://localhost:3000';
+import { baseUrl } from '#/lib/config';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

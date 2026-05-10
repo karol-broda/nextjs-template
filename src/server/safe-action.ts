@@ -1,15 +1,15 @@
 import { createSafeActionClient } from 'next-safe-action';
 import { getSession } from '#/auth/utils';
 import { AppError, AuthError } from '#/lib/result';
-import logger from '#/lib/logger';
+import { log } from '#/lib/logger';
 
 function handleServerError(error: Error): string {
   if (error instanceof AppError) {
-    logger.warn({ code: error.code, message: error.message }, 'action error');
+    log.warn({ code: error.code, message: error.message, action: 'server_action_error' });
     return error.userMessage;
   }
 
-  logger.error({ err: error }, 'unhandled action error');
+  log.error({ err: error, action: 'unhandled_action_error' });
   return 'something went wrong';
 }
 
